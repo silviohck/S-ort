@@ -1,0 +1,55 @@
+name: Instalador do Mac
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: package-lock.json }
+      - run: npm ci
+      - run: npm test
+
+  build:
+    needs: testes
+    # Por enquanto só Mac; o Windows entra depois (npm run dist:win)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: package-lock.json }
+      - run: npm ci
+      - name: Gerar instalador
+        run: npm run dist:mac
+        env:
+          # Sem certificado: o instalador sai sem assinatura digital
+          CSC_IDENTITY_AUTO_DISCOVERY: false
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Solicitacoes-mac
+          path: dist/*.dmg
+          if-no-files-found: error
+      - name: Ler versão
+        id: versao
+        run: echo "v=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+      # Publica na página de versões (Releases) com link direto, sem precisar de login
+      - name: Publicar na página de versões
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.versao.outputs.v }}
+          target_commitish: ${{ github.sha }}
+          name: Solicitações ${{ steps.versao.outputs.v }} (Mac)
+          make_latest: true
+          files: dist/*.dmg
+          body: |
+            Baixe o arquivo **Solicitacoes-${{ steps.versao.outputs.v }}-mac.dmg** abaixo.
+            Na primeira vez: Ajustes do Sistema → Privacidade e Segurança → Abrir mesmo assim.
+            Se aparecer "está danificado": no Terminal, `xattr -cr /Applications/Solicitações.app`.
