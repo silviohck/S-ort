@@ -27,7 +27,7 @@ struct ListaSolicitacoes: View {
             ToolbarItem {
                 Picker("Exibir", selection: $m.modoQuadro) {
                     Label("Lista", systemImage: "list.bullet").tag(false)
-                    Label("Quadro", systemImage: "square.split.3x1").tag(true)
+                    Label("Quadro", systemImage: "rectangle.split.3x1").tag(true)
                 }
                 .pickerStyle(.segmented)
                 .help("Lista ou quadro")
@@ -55,17 +55,17 @@ struct ListaSolicitacoes: View {
                     .font(.caption).foregroundStyle(.secondary)
                 }
             }
-            .width(min: 160, ideal: 240)
+            .width(min: 150, ideal: 220)
             TableColumn("Convênio") { s in Text(m.convenio(s.convenioId)?.nome ?? "—") }
                 .width(min: 80, ideal: 110)
             TableColumn("Status") { s in ChipStatus(id: s.status) }
                 .width(min: 90, ideal: 110)
             TableColumn("Enviada") { s in Text(Datas.formatar(s.dataEnvio)).monospacedDigit() }
-                .width(min: 70, ideal: 80)
+                .width(min: 84, ideal: 88)
             TableColumn("Prazo") { s in
                 Text(Regras.aguardandoResposta.contains(s.status) ? Datas.formatar(m.dataLimite(s) ?? "") : "").monospacedDigit()
             }
-            .width(min: 70, ideal: 80)
+            .width(min: 84, ideal: 88)
             TableColumn("Alertas") { s in ChipsAlerta(alertas: m.alertas(s)) }
                 .width(min: 120, ideal: 200)
         }

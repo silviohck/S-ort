@@ -25,9 +25,9 @@ struct Pacientes: View {
             } else {
                 Table(lista, selection: $selecao) {
                     TableColumn("Nome") { p in Text(p.nome).fontWeight(.medium) }.width(min: 160, ideal: 220)
-                    TableColumn("CPF") { p in Text(p.cpf).monospacedDigit() }.width(min: 100, ideal: 120)
-                    TableColumn("Nascimento") { p in Text(Datas.formatar(p.nascimento)).monospacedDigit() }.width(min: 80, ideal: 90)
-                    TableColumn("Telefone") { p in Text(p.telefone) }.width(min: 90, ideal: 120)
+                    TableColumn("CPF") { p in Text(p.cpf).monospacedDigit() }.width(min: 118, ideal: 124)
+                    TableColumn("Nascimento") { p in Text(Datas.formatar(p.nascimento)).monospacedDigit() }.width(min: 84, ideal: 90)
+                    TableColumn("Telefone") { p in Text(p.telefone) }.width(min: 110, ideal: 120)
                     TableColumn("Convênio") { p in Text(m.convenio(p.convenioId)?.nome ?? "") }.width(min: 80, ideal: 120)
                     TableColumn("Carteirinha") { p in Text(p.carteirinha).monospacedDigit() }.width(min: 90, ideal: 130)
                     TableColumn("Em aberto") { p in Text(abertas[p.id].map(String.init) ?? "") }.width(min: 60, ideal: 70)

@@ -55,7 +55,7 @@ struct Painel: View {
                     }
                 }
 
-                HStack(alignment: .top, spacing: 16) {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 380), spacing: 16, alignment: .top)], alignment: .leading, spacing: 16) {
                     GroupBox {
                         if atencao.isEmpty {
                             Text("Nada pendente. Tudo em dia.").foregroundStyle(.secondary).frame(maxWidth: .infinity).padding()
@@ -69,7 +69,6 @@ struct Painel: View {
                         }
                     } label: { Text("Precisa de atenção (\(atencao.count))").font(.headline) }
                     .frame(maxWidth: .infinity)
-                    .layoutPriority(1)
 
                     GroupBox {
                         if agenda.isEmpty {
