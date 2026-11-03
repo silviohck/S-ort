@@ -1,65 +1,55 @@
-# Solicitações (Mac)
+# Solicitações
 
-> App exclusivo para Mac (Intel e Apple Silicon).
+App para **Mac** (Intel e Apple Silicon, macOS 13 Ventura ou mais recente) para acompanhar solicitações de
+**exames, procedimentos, terapias, cirurgias/internações e OPME**, por **plano de saúde** ou **particular**.
 
-App de computador para acompanhar solicitações de **exames, procedimentos, terapias, cirurgias/internações e OPME**,
-tanto por **plano de saúde** quanto **particular**.
+Feito em Swift e SwiftUI, com as telas e controles do próprio macOS. Não embute navegador: o instalador tem poucos MB.
+
+## Instalar
+
+1. Baixe **`Solicitacoes-x.y.z-mac.dmg`** em https://github.com/silviohck/S-ort/releases/latest
+2. Abra o `.dmg` e arraste **Solicitações** para **Aplicativos**.
+3. Na primeira vez o Mac avisa que não pode verificar o desenvolvedor (o app ainda não tem a assinatura paga da Apple):
+   abra **Ajustes do Sistema → Privacidade e Segurança** e clique em **Abrir mesmo assim**.
+4. Se aparecer "está danificado e não pode ser aberto", rode no Terminal `xattr -cr /Applications/Solicitações.app`.
 
 ## O que faz
 
-- **Painel**: quantas solicitações estão em aberto, a enviar, aguardando a operadora, com pendência, autorizadas a agendar
-  e com prazo vencido. Lista do que **precisa de atenção** e dos **próximos agendamentos**.
-- **Solicitações**: lista com busca (sem precisar de acento) e filtros por status, tipo e convênio, ou **quadro**
-  em que se arrasta o cartão para mudar o status. Exporta planilha (CSV que abre no Excel).
-- **Ficha da solicitação**: paciente, convênio, tipo, caráter (eletiva/urgência), procedimento, código TUSS, CID,
-  médico, local de realização, protocolo, guia, senha e validade, datas de envio, resposta, agendamento e realização.
-  Nas particulares: valor, forma e situação do pagamento.
-- **Status**: A enviar → Enviada → Em análise → Pendência → Autorizada / Autorizada parcial / Negada → Agendada →
-  Realizada (ou Cancelada). Cada mudança fica no **histórico** com data, hora e observação (ex.: motivo da negativa,
-  documentos pedidos). Também dá para registrar ligações e contatos.
-- **Prazos**: a partir da data de envio, calcula a **data limite da resposta em dias úteis** (pula fins de semana,
-  feriados nacionais e feriados locais cadastrados). Os prazos por tipo vêm dos prazos de garantia de atendimento da ANS
-  (RN 566/2022) e podem ser alterados em Configurações ou em cada solicitação. Confira a norma vigente.
-- **Alertas**: prazo vencendo ou vencido, senha de autorização perto de vencer, pendência com a operadora,
-  data de retorno/cobrança, agendamento que passou sem marcar como realizado e pagamento particular em aberto.
-- **Anexos**: arraste pedidos médicos, laudos, guias e negativas para a solicitação. Os arquivos são copiados para a
-  pasta de dados do app.
-- **Imprimir ficha** da solicitação com o histórico.
+- **Painel**: em aberto, a enviar, aguardando a operadora, pendências, autorizadas a agendar e prazo vencido; lista do que
+  precisa de atenção e dos próximos agendamentos.
+- **Solicitações**: tabela com busca (sem precisar de acento) e filtros por status, tipo e convênio, ou **quadro** em que
+  se arrasta o cartão para mudar o status. Exporta planilha (CSV para Excel/Numbers).
+- **Ficha**: paciente, convênio, tipo, caráter, procedimento, código TUSS, CID, médico, local, protocolo, guia, senha e
+  validade, datas de envio, resposta, agendamento e realização. Nas particulares: valor, forma e situação do pagamento.
+- **Status** com **histórico** (data, hora e observação de cada mudança) e registro de contatos.
+- **Prazo em dias úteis** a partir do envio (fins de semana, feriados nacionais e locais). Prazos por tipo da ANS
+  (RN 566/2022), editáveis nos Ajustes (⌘,) ou em cada solicitação.
+- **Alertas**: prazo vencendo/vencido, senha vencendo, pendência, retorno, agendamento que passou, pagamento em aberto.
+- **Anexos**: arraste pedidos, laudos e guias para a ficha.
+- **Imprimir ficha** (⌘P), também dá para salvar em PDF pelo diálogo de impressão.
+
+Atalhos: ⌘N nova solicitação, ⇧⌘N novo paciente, ⌘1–⌘4 telas, ⌘[ voltar, ⇧⌘E exportar planilha.
 
 ## Onde ficam os dados
 
-Tudo fica no computador, num arquivo `dados.json` e na pasta `anexos/`. Uma cópia de segurança diária é guardada
-automaticamente em `backups/` (as 30 mais recentes). Em **Configurações** dá para abrir a pasta, trocar de pasta e
-exportar/importar backup.
-
-**Mais de um computador:** escolha uma pasta sincronizada (iCloud Drive, Dropbox, Google Drive). Se outro computador
-gravar enquanto este está aberto, o app avisa e recarrega a versão mais nova em vez de sobrescrevê-la.
-Não é feito para várias pessoas editarem ao mesmo tempo.
-
-## Instalar no Mac
-
-1. Abra a página de versões: https://github.com/silviohck/S-ort/releases
-   e baixe **`Solicitacoes-x.y.z-mac.dmg`** (funciona em Mac Intel e Apple Silicon; não precisa de conta no GitHub).
-2. Abra o `.dmg` e arraste **Solicitações** para a pasta **Aplicativos**.
-3. Na primeira vez o Mac avisa que não pode verificar o desenvolvedor (o app ainda não tem assinatura paga da Apple):
-   - abra **Ajustes do Sistema → Privacidade e Segurança**, role até o aviso sobre "Solicitações" e clique em
-     **Abrir mesmo assim**; ou
-   - no Finder, clique com o botão direito no app → **Abrir** → **Abrir**.
-4. Se ainda assim aparecer "está danificado e não pode ser aberto", no Terminal rode:
-   `xattr -cr /Applications/Solicitações.app` e abra de novo.
-
-Cada alteração nesta pasta também gera o instalador em *Actions → Instalador do Mac → Artifacts* (exige login).
-Para publicar uma nova versão, aumente `version` em `package.json`; sem isso o arquivo da versão atual é substituído.
+Em `~/Library/Application Support/Solicitações/dados/`: `dados.json`, a pasta `anexos/` e uma cópia diária em
+`backups/` (as 30 mais recentes). Nos Ajustes dá para trocar a pasta (ex.: iCloud Drive), exportar e importar backup.
+Se outro Mac gravar na mesma pasta, o app avisa e recarrega em vez de sobrescrever.
 
 ## Desenvolvimento
 
-```bash
-npm install
-npm start              # abre o app
-npm test               # testes das regras de prazo, status e filtros
-npm run test:e2e       # abre o app e percorre o fluxo completo (requer Playwright)
-npm run dist:mac       # gera o .dmg (num Mac)
+```
+Sources/SolicitacoesCore/   regras (prazos, alertas, busca), modelos e gravação — só Foundation
+Sources/Solicitacoes/       telas em SwiftUI
+Tests/                      testes das regras e da gravação (+ dados de exemplo)
+scripts/empacotar.sh        gera o .app e o .dmg
+VERSAO                      número da versão (aumente para publicar uma nova)
 ```
 
-Estrutura: `src/main.js` (janela, arquivo de dados, anexos, backup), `src/preload.js` (ponte segura),
-`src/renderer/` (interface: `logic.js` com as regras, `app.js` com as telas, `styles.css`).
+```bash
+swift test                 # testes (funciona também em Linux)
+swift run Solicitacoes     # abre o app (num Mac)
+./scripts/empacotar.sh     # gera dist/Solicitacoes-<versão>-mac.dmg (num Mac com Xcode)
+```
+
+O GitHub Actions roda os testes, gera o `.dmg` e publica na página de versões a cada envio para `main`.

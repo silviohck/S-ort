@@ -1,0 +1,321 @@
+{
+ "versao": 1,
+ "seq": 7,
+ "config": {
+  "nomeClinica": "Consultório Dr. Silvio Monteiro",
+  "prazos": {},
+  "feriadosExtras": []
+ },
+ "convenios": [
+  {
+   "id": "particular",
+   "nome": "Particular",
+   "tipo": "particular"
+  },
+  {
+   "id": "c1",
+   "nome": "Unimed",
+   "tipo": "plano",
+   "ans": "123456",
+   "telefone": "0800 000 0000",
+   "site": "unimed.coop.br"
+  },
+  {
+   "id": "c2",
+   "nome": "Bradesco Saúde",
+   "tipo": "plano"
+  },
+  {
+   "id": "c3",
+   "nome": "SulAmérica",
+   "tipo": "plano"
+  }
+ ],
+ "pacientes": [
+  {
+   "id": "p1",
+   "nome": "João da Conceição",
+   "cpf": "123.456.789-01",
+   "nascimento": "1968-04-12",
+   "telefone": "(11) 98888-1111",
+   "convenioId": "c1",
+   "carteirinha": "0 123 456789 00-1"
+  },
+  {
+   "id": "p2",
+   "nome": "Maria Aparecida Souza",
+   "cpf": "987.654.321-00",
+   "nascimento": "1975-09-30",
+   "telefone": "(11) 97777-2222",
+   "convenioId": "c2",
+   "carteirinha": "884422"
+  },
+  {
+   "id": "p3",
+   "nome": "Carlos Henrique Lima",
+   "cpf": "111.222.333-44",
+   "nascimento": "1990-01-05",
+   "telefone": "(11) 96666-3333",
+   "convenioId": "particular"
+  },
+  {
+   "id": "p4",
+   "nome": "Ana Beatriz Rocha",
+   "cpf": "555.666.777-88",
+   "nascimento": "1982-11-20",
+   "telefone": "(11) 95555-4444",
+   "convenioId": "c3",
+   "carteirinha": "SA-7781"
+  }
+ ],
+ "solicitacoes": [
+  {
+   "id": "s1",
+   "numero": 1,
+   "pacienteId": "p1",
+   "convenioId": "c1",
+   "tipo": "alta_complexidade",
+   "carater": "eletiva",
+   "descricao": "Ressonância magnética de joelho direito",
+   "status": "analise",
+   "dataPedido": "2026-10-01",
+   "quantidade": 1,
+   "historico": [
+    {
+     "em": "2026-10-01T10:00:00.000Z",
+     "tipo": "criacao",
+     "texto": "Solicitação criada"
+    },
+    {
+     "em": "2026-10-02T10:00:00.000Z",
+     "tipo": "status",
+     "de": "rascunho",
+     "para": "enviada",
+     "texto": "Enviado pelo portal"
+    },
+    {
+     "em": "2026-10-20T10:00:00.000Z",
+     "tipo": "status",
+     "de": "enviada",
+     "para": "analise",
+     "texto": ""
+    }
+   ],
+   "anexos": [],
+   "medico": "Dra. Ana Paula",
+   "criadoEm": "2026-10-01T10:00:00.000Z",
+   "codigo": "41101197",
+   "cid": "M23.2",
+   "dataEnvio": "2026-10-02",
+   "protocolo": "PROT-99812",
+   "local": "Hospital Santa Clara"
+  },
+  {
+   "id": "s2",
+   "numero": 2,
+   "pacienteId": "p2",
+   "convenioId": "c2",
+   "tipo": "cirurgia",
+   "carater": "eletiva",
+   "descricao": "Colecistectomia videolaparoscópica",
+   "status": "autorizada",
+   "dataPedido": "2026-10-01",
+   "quantidade": 1,
+   "historico": [
+    {
+     "em": "2026-10-01T10:00:00.000Z",
+     "tipo": "criacao",
+     "texto": "Solicitação criada"
+    },
+    {
+     "em": "2026-10-02T10:00:00.000Z",
+     "tipo": "status",
+     "de": "rascunho",
+     "para": "enviada",
+     "texto": "Enviado pelo portal"
+    },
+    {
+     "em": "2026-10-20T10:00:00.000Z",
+     "tipo": "status",
+     "de": "enviada",
+     "para": "autorizada",
+     "texto": ""
+    }
+   ],
+   "anexos": [],
+   "medico": "Dra. Ana Paula",
+   "criadoEm": "2026-10-01T10:00:00.000Z",
+   "cid": "K80.2",
+   "dataEnvio": "2026-10-02",
+   "senha": "A77B91",
+   "validadeSenha": "2026-11-08",
+   "protocolo": "BR-5521"
+  },
+  {
+   "id": "s3",
+   "numero": 3,
+   "pacienteId": "p3",
+   "convenioId": "particular",
+   "tipo": "procedimento",
+   "carater": "eletiva",
+   "descricao": "Infiltração articular de ombro",
+   "status": "agendada",
+   "dataPedido": "2026-10-01",
+   "quantidade": 1,
+   "historico": [
+    {
+     "em": "2026-10-01T10:00:00.000Z",
+     "tipo": "criacao",
+     "texto": "Solicitação criada"
+    },
+    {
+     "em": "2026-10-02T10:00:00.000Z",
+     "tipo": "status",
+     "de": "rascunho",
+     "para": "enviada",
+     "texto": "Enviado pelo portal"
+    },
+    {
+     "em": "2026-10-20T10:00:00.000Z",
+     "tipo": "status",
+     "de": "enviada",
+     "para": "agendada",
+     "texto": ""
+    }
+   ],
+   "anexos": [],
+   "medico": "Dra. Ana Paula",
+   "criadoEm": "2026-10-01T10:00:00.000Z",
+   "valor": 850,
+   "dataAgendada": "2026-11-10",
+   "formaPagamento": "Pix"
+  },
+  {
+   "id": "s4",
+   "numero": 4,
+   "pacienteId": "p4",
+   "convenioId": "c3",
+   "tipo": "exame",
+   "carater": "eletiva",
+   "descricao": "Tomografia de crânio",
+   "status": "pendencia",
+   "dataPedido": "2026-10-01",
+   "quantidade": 1,
+   "historico": [
+    {
+     "em": "2026-10-01T10:00:00.000Z",
+     "tipo": "criacao",
+     "texto": "Solicitação criada"
+    },
+    {
+     "em": "2026-10-02T10:00:00.000Z",
+     "tipo": "status",
+     "de": "rascunho",
+     "para": "enviada",
+     "texto": "Enviado pelo portal"
+    },
+    {
+     "em": "2026-10-20T10:00:00.000Z",
+     "tipo": "status",
+     "de": "enviada",
+     "para": "pendencia",
+     "texto": "Pediram relatório médico detalhado"
+    }
+   ],
+   "anexos": [],
+   "medico": "Dra. Ana Paula",
+   "criadoEm": "2026-10-01T10:00:00.000Z",
+   "dataEnvio": "2026-10-27",
+   "retorno": "2026-11-05"
+  },
+  {
+   "id": "s5",
+   "numero": 5,
+   "pacienteId": "p1",
+   "convenioId": "c1",
+   "tipo": "exame_lab",
+   "carater": "eletiva",
+   "descricao": "Hemograma, PCR e VHS",
+   "status": "rascunho",
+   "dataPedido": "2026-10-01",
+   "quantidade": 1,
+   "historico": [
+    {
+     "em": "2026-10-01T10:00:00.000Z",
+     "tipo": "criacao",
+     "texto": "Solicitação criada"
+    }
+   ],
+   "anexos": [],
+   "medico": "Dra. Ana Paula",
+   "criadoEm": "2026-10-01T10:00:00.000Z"
+  },
+  {
+   "id": "s6",
+   "numero": 6,
+   "pacienteId": "p2",
+   "convenioId": "c2",
+   "tipo": "exame",
+   "carater": "eletiva",
+   "descricao": "Ultrassonografia de abdome total",
+   "status": "negada",
+   "dataPedido": "2026-10-01",
+   "quantidade": 1,
+   "historico": [
+    {
+     "em": "2026-10-01T10:00:00.000Z",
+     "tipo": "criacao",
+     "texto": "Solicitação criada"
+    },
+    {
+     "em": "2026-10-02T10:00:00.000Z",
+     "tipo": "status",
+     "de": "rascunho",
+     "para": "enviada",
+     "texto": "Enviado pelo portal"
+    },
+    {
+     "em": "2026-10-20T10:00:00.000Z",
+     "tipo": "status",
+     "de": "enviada",
+     "para": "negada",
+     "texto": "Negado: falta justificativa clínica"
+    }
+   ],
+   "anexos": [],
+   "medico": "Dra. Ana Paula",
+   "criadoEm": "2026-10-01T10:00:00.000Z",
+   "dataEnvio": "2026-10-02"
+  },
+  {
+   "id": "s7",
+   "numero": 7,
+   "pacienteId": "p4",
+   "convenioId": "c3",
+   "tipo": "terapia",
+   "carater": "eletiva",
+   "descricao": "Fisioterapia — 10 sessões",
+   "status": "enviada",
+   "dataPedido": "2026-10-01",
+   "quantidade": 10,
+   "historico": [
+    {
+     "em": "2026-10-01T10:00:00.000Z",
+     "tipo": "criacao",
+     "texto": "Solicitação criada"
+    },
+    {
+     "em": "2026-10-02T10:00:00.000Z",
+     "tipo": "status",
+     "de": "rascunho",
+     "para": "enviada",
+     "texto": "Enviado pelo portal"
+    }
+   ],
+   "anexos": [],
+   "medico": "Dra. Ana Paula",
+   "criadoEm": "2026-10-01T10:00:00.000Z",
+   "dataEnvio": "2026-10-30"
+  }
+ ]
+}

@@ -9,28 +9,29 @@ permissions:
   contents: write
 
 jobs:
-  testes:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: 22, cache: npm, cache-dependency-path: package-lock.json }
-      - run: npm ci
-      - run: npm test
-
   build:
-    needs: testes
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: 22, cache: npm, cache-dependency-path: package-lock.json }
-      - run: npm ci
-      - name: Gerar instalador
-        run: npm run dist:mac
-        env:
-          # Sem certificado: o instalador sai sem assinatura digital
-          CSC_IDENTITY_AUTO_DISCOVERY: false
+      - name: Versões
+        run: sw_vers && swift --version
+      - name: Testes
+        run: swift test
+      - name: Gerar app e .dmg
+        run: ./scripts/empacotar.sh
+      - name: Capturas de tela
+        continue-on-error: true
+        run: |
+          mkdir -p capturas
+          for tela in painel solicitacoes quadro editor pacientes; do
+            D="$(mktemp -d)"; cp Tests/Exemplo/dados.json "$D/"
+            SOLICITACOES_DADOS="$D" SOLICITACOES_TELA="$tela" "dist/Solicitações.app/Contents/MacOS/Solicitacoes" &
+            PID=$!
+            sleep 8
+            screencapture -x "capturas/$tela.png"
+            kill $PID; wait $PID 2>/dev/null || true
+          done
+          ls -l capturas
       - uses: actions/upload-artifact@v4
         with:
           name: Solicitacoes-mac
@@ -38,8 +39,8 @@ jobs:
           if-no-files-found: error
       - name: Ler versão
         id: versao
-        run: echo "v=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
-      # Publica na página de versões (Releases) com link direto, sem precisar de login
+        run: echo "v=$(tr -d '[:space:]' < VERSAO)" >> "$GITHUB_OUTPUT"
+      # Página de versões (Releases): link direto, sem precisar de login
       - name: Publicar na página de versões
         uses: softprops/action-gh-release@v2
         with:
@@ -49,6 +50,16 @@ jobs:
           make_latest: true
           files: dist/*.dmg
           body: |
-            Baixe o arquivo **Solicitacoes-${{ steps.versao.outputs.v }}-mac.dmg** abaixo.
+            Baixe o arquivo **Solicitacoes-${{ steps.versao.outputs.v }}-mac.dmg** abaixo (Mac Intel e Apple Silicon, macOS 13 ou mais recente).
             Na primeira vez: Ajustes do Sistema → Privacidade e Segurança → Abrir mesmo assim.
             Se aparecer "está danificado": no Terminal, `xattr -cr /Applications/Solicitações.app`.
+      - name: Publicar capturas de tela
+        if: hashFiles('capturas/*.png') != ''
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: capturas
+          name: Capturas de tela (teste automático)
+          prerelease: true
+          make_latest: false
+          files: capturas/*.png
+          body: Fotos das telas tiradas automaticamente a cada versão, com dados de exemplo. Não é para instalar.
