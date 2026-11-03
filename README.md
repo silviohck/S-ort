@@ -1,6 +1,6 @@
 # Solicitações (Mac)
 
-> Desenvolvimento focado no Mac. A versão Windows vem depois (o código já é compatível; falta gerar e testar o instalador).
+> App exclusivo para Mac (Intel e Apple Silicon).
 
 App de computador para acompanhar solicitações de **exames, procedimentos, terapias, cirurgias/internações e OPME**,
 tanto por **plano de saúde** quanto **particular**.
@@ -32,7 +32,7 @@ Tudo fica no computador, num arquivo `dados.json` e na pasta `anexos/`. Uma cóp
 automaticamente em `backups/` (as 30 mais recentes). Em **Configurações** dá para abrir a pasta, trocar de pasta e
 exportar/importar backup.
 
-**Mais de um computador:** escolha uma pasta sincronizada (OneDrive, Dropbox, Google Drive). Se outro computador
+**Mais de um computador:** escolha uma pasta sincronizada (iCloud Drive, Dropbox, Google Drive). Se outro computador
 gravar enquanto este está aberto, o app avisa e recarrega a versão mais nova em vez de sobrescrevê-la.
 Não é feito para várias pessoas editarem ao mesmo tempo.
 
@@ -59,7 +59,6 @@ npm start              # abre o app
 npm test               # testes das regras de prazo, status e filtros
 npm run test:e2e       # abre o app e percorre o fluxo completo (requer Playwright)
 npm run dist:mac       # gera o .dmg (num Mac)
-npm run dist:win       # gera o instalador .exe (no Windows)
 ```
 
 Estrutura: `src/main.js` (janela, arquivo de dados, anexos, backup), `src/preload.js` (ponte segura),
